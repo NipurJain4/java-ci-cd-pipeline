@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: hello-java-app
-        image: YOUR_DOCKERHUB_USERNAME/java-cicd-pipeline:latest
+        image: nipurjain/java-cicd-pipeline:latest
         ports:
         - containerPort: 8080
 ---
