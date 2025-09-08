@@ -17,10 +17,13 @@ public class HelloWorld {
 
     static class MyHandler implements HttpHandler {
         @Override
-        public void handle(HttpExchange t) throws IOException {
+        public void handle(HttpExchange exchange) throws IOException {
             String response = "<html><body><h1>Hello, CI/CD Pipeline with Docker!</h1><p>Application is running successfully!</p><p>Deployed via GitHub Actions → Docker Hub → Kubernetes</p></body></html>";
-            t.sendResponseHeaders(200, response.length());
-            OutputStream os = t.getResponseBody();
+            
+            exchange.getResponseHeaders().set("Content-Type", "text/html");
+            exchange.sendResponseHeaders(200, response.getBytes().length);
+            
+            OutputStream os = exchange.getResponseBody();
             os.write(response.getBytes());
             os.close();
         }
